@@ -5,13 +5,19 @@ import java.util.List;
 import com.letsplay.server.entity.Player;
 
 public interface PlayerService {
-	List<Player> findAll();	
-	
-	Player findById(Long PlayerId);
-	
-	Player create(Player Player);
-	
-	Player update(Player Player);
- 
-	void delete(Long PlayerId);
+	Player findById(Long id);
+
+	Player findByLogin(String login);
+
+	void savePlayer(Player player);
+
+	void updatePlayer(Player player);
+
+	void deletePlayerById(Long id);
+
+	void deleteAllPlayers();
+
+	List<Player> findAllPlayers();
+
+	boolean isPlayerExist(Player player);
 }

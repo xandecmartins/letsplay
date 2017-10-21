@@ -1,15 +1,24 @@
 package com.letsplay.server.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
 public class Player {
 
 	@Id
-	@GeneratedValue
-	private Long id;
-	
+    @GeneratedValue
+    private Long id;
+ 
+    @NotEmpty
+    @Column(nullable=false)	
 	private String login;
+	
 
 	public Long getId() {
 		return id;
