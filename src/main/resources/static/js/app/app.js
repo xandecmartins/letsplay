@@ -2,8 +2,8 @@
 var app = angular.module('letsPlayApp',['ui.router','ngStorage']);
  
 app.constant('urls', {
-    BASE: 'http://localhost:8080/',
-    USER_SERVICE_API : 'http://localhost:8080/api/player/'
+    BASE: 'https://localhost:8080/',
+    USER_SERVICE_API : 'https://localhost:8080/api/player/'
 });
  
 app.config(['$stateProvider', '$urlRouterProvider',
