@@ -1,105 +1,105 @@
 
 'use strict';
  
-angular.module('letsPlayApp').factory('PlayerService',
+angular.module('letsPlayApp').factory('GroupService',
     ['$localStorage', '$http', '$q', 'urls',
         function ($localStorage, $http, $q, urls) {
  
             var factory = {
-                loadAllPlayers: loadAllPlayers,
-                getAllPlayers: getAllPlayers,
-                getPlayer: getPlayer,
-                createPlayer: createPlayer,
-                updatePlayer: updatePlayer,
-                removePlayer: removePlayer
+                loadAllGroups: loadAllGroups,
+                getAllGroups: getAllGroups,
+                getGroup: getGroup,
+                createGroup: createGroup,
+                updateGroup: updateGroup,
+                removeGroup: removeGroup
             };
  
             return factory;
  
-            function loadAllPlayers() {
-                console.log('Fetching all players');
+            function loadAllGroups() {
+                console.log('Fetching all groups');
                 var deferred = $q.defer();
-                $http.get(urls.PLAYER_SERVICE_API)
+                $http.get(urls.GROUP_SERVICE_API)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully all players');
-                            $localStorage.players = response.data;
+                            console.log('Fetched successfully all groups');
+                            $localStorage.groups = response.data;
                             deferred.resolve(response);
                         },
                         function (errResponse) {
-                            console.error('Error while loading players');
+                            console.error('Error while loading groups');
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
  
-            function getAllPlayers(){
-                return $localStorage.players;
+            function getAllGroups(){
+                return $localStorage.groups;
             }
  
-            function getPlayer(id) {
-                console.log('Fetching Player with id :'+id);
+            function getGroup(id) {
+                console.log('Fetching Group with id :'+id);
                 var deferred = $q.defer();
-                $http.get(urls.PLAYER_SERVICE_API + id)
+                $http.get(urls.GROUP_SERVICE_API + id)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully Player with id :'+id);
+                            console.log('Fetched successfully Group with id :'+id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while loading player with id :'+id);
+                            console.error('Error while loading group with id :'+id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
  
-            function createPlayer(player) {
-                console.log('Creating Player');
+            function createGroup(group) {
+                console.log('Creating Group');
                 var deferred = $q.defer();
-                $http.post(urls.PLAYER_SERVICE_API, player)
+                $http.post(urls.GROUP_SERVICE_API, group)
                     .then(
                         function (response) {
-                            loadAllPlayers();
+                            loadAllGroups();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                           console.error('Error while creating Player : '+errResponse.data.errorMessage);
+                           console.error('Error while creating Group : '+errResponse.data.errorMessage);
                            deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
  
-            function updatePlayer(player, id) {
-                console.log('Updating Player with id '+id);
+            function updateGroup(group, id) {
+                console.log('Updating Group with id '+id);
                 var deferred = $q.defer();
-                $http.put(urls.PLAYER_SERVICE_API + id, player)
+                $http.put(urls.GROUP_SERVICE_API + id, group)
                     .then(
                         function (response) {
-                            loadAllPlayers();
+                            loadAllGroups();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while updating Player with id :'+id);
+                            console.error('Error while updating Group with id :'+id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
  
-            function removePlayer(id) {
-                console.log('Removing Player with id '+id);
+            function removeGroup(id) {
+                console.log('Removing Group with id '+id);
                 var deferred = $q.defer();
-                $http.delete(urls.PLAYER_SERVICE_API + id)
+                $http.delete(urls.GROUP_SERVICE_API + id)
                     .then(
                         function (response) {
-                            loadAllPlayers();
+                            loadAllGroups();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing Player with id :'+id);
+                            console.error('Error while removing Group with id :'+id);
                             deferred.reject(errResponse);
                         }
                     );

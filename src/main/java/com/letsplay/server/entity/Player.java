@@ -1,10 +1,15 @@
 package com.letsplay.server.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -12,13 +17,26 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Player {
 
 	@Id
-    @GeneratedValue
-    private Long id;
- 
-    @NotEmpty
-    @Column(nullable=false)	
+	@GeneratedValue
+	private Long id;
+
+	@NotEmpty
+	@Column(nullable = false)
 	private String login;
-	
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "player_group", 
+		joinColumns = @JoinColumn(name = "player_id", referencedColumnName = "id"), 
+		inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
+	private List<Group> groups;
+
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
 
 	public Long getId() {
 		return id;
@@ -60,5 +78,5 @@ public class Player {
 			return false;
 		return true;
 	}
-	
+
 }
