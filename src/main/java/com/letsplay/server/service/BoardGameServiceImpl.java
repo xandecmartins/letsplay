@@ -37,10 +37,9 @@ public class BoardGameServiceImpl implements BoardGameService {
 	}
 
 	public void importBoardGameFromBGG(Player player) {
-		Player playerBD = playerService.findById(player.getId());
-		List<BoardGame> collection = bggService.importCollectionFromUser(playerBD.getLoginBgg());
-		playerBD.setCollection(collection);
-		playerService.savePlayer(playerBD);
+		List<BoardGame> collection = bggService.importCollectionFromUser(player.getLoginBgg());
+		player.setCollection(collection);
+		playerService.updatePlayer(player);
 	}
 
 	public void saveBoardGame(BoardGame boardGame) {

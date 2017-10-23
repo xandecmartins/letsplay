@@ -77,7 +77,7 @@ public class PlayerController {
     
     @RequestMapping(value = "/player/{id}/import", method = RequestMethod.POST)
     public ResponseEntity<?> importCollectionPlayer(@PathVariable("id") long id) {
-        logger.info("Updating Player with id {}", id);
+        logger.info("Importing Collection of Player with id {}", id);
  
         Player currentPlayer = playerService.findById(id);
  

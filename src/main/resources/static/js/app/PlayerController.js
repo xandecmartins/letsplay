@@ -13,6 +13,7 @@ angular.module('letsPlayApp').controller('PlayerController',
         self.updatePlayer = updatePlayer;
         self.removePlayer = removePlayer;
         self.editPlayer = editPlayer;
+        self.importCollectionPlayer = importCollectionPlayer;
         self.reset = reset;
  
         self.successMessage = '';

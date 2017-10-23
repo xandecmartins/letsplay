@@ -11,7 +11,8 @@ angular.module('letsPlayApp').factory('PlayerService',
                 getPlayer: getPlayer,
                 createPlayer: createPlayer,
                 updatePlayer: updatePlayer,
-                removePlayer: removePlayer
+                removePlayer: removePlayer,
+                importCollectionPlayer: importCollectionPlayer
             };
  
             return factory;
