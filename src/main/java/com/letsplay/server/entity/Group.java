@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +20,9 @@ public class Group {
 	
 	@ManyToMany(mappedBy = "groups")
 	private List<Player> players;
+	
+	@OneToMany
+	private List<Event> events;
 	
 	private String name;
 	
@@ -54,6 +58,14 @@ public class Group {
 
 	public void setLastGame(Date lastGame) {
 		this.lastGame = lastGame;
+	}
+	
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 	@Override

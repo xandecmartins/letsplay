@@ -25,7 +25,7 @@ public class PlayerController {
     public static final Logger logger = LoggerFactory.getLogger(PlayerController.class);
  
     @Autowired
-    PlayerService playerService; //Service which will do all data retrieval/manipulation work
+    private PlayerService playerService; //Service which will do all data retrieval/manipulation work
  
     // -------------------Retrieve All Players---------------------------------------------
  

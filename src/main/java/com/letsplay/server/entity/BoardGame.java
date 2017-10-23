@@ -17,6 +17,17 @@ public class BoardGame {
 	@ManyToMany(mappedBy="collection")
 	private List<Player> players;
 	
+	@ManyToMany(mappedBy="selectedGames")
+	private List<Event> events;
+	
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
 	public Long getId() {
 		return id;
 	}

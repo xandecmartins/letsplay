@@ -25,7 +25,7 @@ public class GroupController {
     public static final Logger logger = LoggerFactory.getLogger(GroupController.class);
  
     @Autowired
-    GroupService groupService; //Service which will do all data retrieval/manipulation work
+    private GroupService groupService; //Service which will do all data retrieval/manipulation work
  
     // -------------------Retrieve All Groups---------------------------------------------
  

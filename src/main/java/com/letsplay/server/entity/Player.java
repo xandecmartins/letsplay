@@ -37,6 +37,17 @@ public class Player {
 		joinColumns = @JoinColumn(name = "player_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name = "boardgame_id", referencedColumnName = "id"))
 	private List<BoardGame> collection;
+	
+	@ManyToMany(mappedBy="confirmedPlayers")
+	private List<Event> events;
+	
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
 
 	public List<Group> getGroups() {
 		return groups;

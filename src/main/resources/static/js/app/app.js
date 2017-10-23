@@ -4,7 +4,8 @@ var app = angular.module('letsPlayApp',['ui.router','ngStorage']);
 app.constant('urls', {
     BASE: '/',
     PLAYER_SERVICE_API : '/api/player/',
-    GROUP_SERVICE_API : '/api/group/'
+    GROUP_SERVICE_API : '/api/group/',
+    EVENT_SERVICE_API : '/api/event/'
 });
  
 app.config(['$stateProvider', '$urlRouterProvider',
@@ -43,11 +44,27 @@ app.config(['$stateProvider', '$urlRouterProvider',
         });
         
         $stateProvider
+        .state('events', {
+            url: '/events',
+            templateUrl: 'partials/listEvent',
+            controller:'EventController',
+            controllerAs:'ctrl',
+            resolve: {
+                events: function ($q, EventService) {
+                    console.log('Load all events');
+                    var deferred = $q.defer();
+                    EventService.loadAllEvents().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+        });
+        
+        $stateProvider
         .state('groups', {
             url: '/groups',
             templateUrl: 'partials/listGroup',
             controller:'GroupController',
-            controllerAs:'ctrlGroup',
+            controllerAs:'ctrl',
             resolve: {
                 groups: function ($q, GroupService) {
                     console.log('Load all groups');

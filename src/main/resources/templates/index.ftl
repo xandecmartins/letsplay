@@ -17,6 +17,7 @@
         <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
         <li><a href="#/groups"><i class="fa fa-shield"></i> Groups</a></li>
         <li><a href="#/players"><i class="fa fa-comment"></i> Players</a></li>
+        <li><a href="#/events"><i class="fa fa-comment"></i> Events</a></li>
       </ul>
     </div>
   </nav>
@@ -28,7 +29,9 @@
         <script src="js/app/app.js"></script>
         <script src="js/app/PlayerService.js"></script>
         <script src="js/app/PlayerController.js"></script>
-         <script src="js/app/GroupService.js"></script>
+        <script src="js/app/GroupService.js"></script>
         <script src="js/app/GroupController.js"></script>
+        <script src="js/app/EventService.js"></script>
+        <script src="js/app/EventController.js"></script>
     </body>
 </html>
