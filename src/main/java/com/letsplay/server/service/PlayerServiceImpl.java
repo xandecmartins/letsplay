@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.letsplay.server.entity.BoardGame;
 import com.letsplay.server.entity.Player;
 import com.letsplay.server.repository.PlayerRepository;
-import com.letsplay.server.to.BGGBoardGameTO;
 
 @Service("playerService")
 @Transactional

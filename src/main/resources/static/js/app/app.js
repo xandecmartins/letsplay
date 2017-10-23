@@ -5,7 +5,8 @@ app.constant('urls', {
     BASE: '/',
     PLAYER_SERVICE_API : '/api/player/',
     GROUP_SERVICE_API : '/api/group/',
-    EVENT_SERVICE_API : '/api/event/'
+    EVENT_SERVICE_API : '/api/event/',
+    BOARD_GAME_SERVICE_API : '/api/board_game/'
 });
  
 app.config(['$stateProvider', '$urlRouterProvider',
@@ -70,6 +71,22 @@ app.config(['$stateProvider', '$urlRouterProvider',
                     console.log('Load all groups');
                     var deferred = $q.defer();
                     GroupService.loadAllGroups().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+        });
+        
+        $stateProvider
+        .state('boardGames', {
+            url: '/boardGames',
+            templateUrl: 'partials/listBoardGame',
+            controller:'BoardGameController',
+            controllerAs:'ctrl',
+            resolve: {
+            	boardGames: function ($q, BoardGameService) {
+                    console.log('Load all groups');
+                    var deferred = $q.defer();
+                    BoardGameService.loadAllBoardGames().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
