@@ -6,6 +6,8 @@ angular.module('letsPlayApp').controller('EventController',
         var self = this;
         self.event = {};
         self.events=[];
+        
+        self.groups=[];
  
         self.submit = submit;
         self.getAllEvents = getAllEvents;
