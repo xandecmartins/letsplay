@@ -7,8 +7,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.letsplay.server.entity.BoardGame;
 import com.letsplay.server.entity.Player;
 import com.letsplay.server.repository.PlayerRepository;
+import com.letsplay.server.to.BGGBoardGameTO;
 
 @Service("playerService")
 @Transactional
@@ -16,6 +18,9 @@ public class PlayerServiceImpl implements PlayerService{
  
     @Autowired
     private PlayerRepository playerRepository;
+    
+    @Autowired
+    private BGGService bggService;
  
     public Player findById(Long id) {
         return playerRepository.findOne(id);
@@ -26,6 +31,10 @@ public class PlayerServiceImpl implements PlayerService{
     }
  
     public void savePlayer(Player player) {
+    	if(player.getLoginBgg()!=null) {
+    		List<BoardGame> collection = bggService.importCollectionFromUser(player.getLoginBgg());
+    		player.setCollection(collection);
+    	}
         playerRepository.save(player);
     }
  

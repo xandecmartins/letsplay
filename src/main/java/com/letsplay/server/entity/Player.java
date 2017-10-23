@@ -23,12 +23,20 @@ public class Player {
 	@NotEmpty
 	@Column(nullable = false)
 	private String login;
-
+	
+	private String loginBgg;
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "player_group", 
 		joinColumns = @JoinColumn(name = "player_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
 	private List<Group> groups;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "player_boardgame", 
+		joinColumns = @JoinColumn(name = "player_id", referencedColumnName = "id"), 
+		inverseJoinColumns = @JoinColumn(name = "boardgame_id", referencedColumnName = "id"))
+	private List<BoardGame> collection;
 
 	public List<Group> getGroups() {
 		return groups;
@@ -52,6 +60,22 @@ public class Player {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public String getLoginBgg() {
+		return loginBgg;
+	}
+
+	public void setLoginBgg(String loginBgg) {
+		this.loginBgg = loginBgg;
+	}
+
+	public List<BoardGame> getCollection() {
+		return collection;
+	}
+
+	public void setCollection(List<BoardGame> collection) {
+		this.collection = collection;
 	}
 
 	@Override

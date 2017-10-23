@@ -10,9 +10,17 @@
                     <input type="hidden" ng-model="ctrl.player.id" />
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label class="col-md-2 control-lable" for="uname">Login</label>
+                            <label class="col-md-2 control-lable" for="ulogin">Login</label>
                             <div class="col-md-7">
                                 <input type="text" ng-model="ctrl.player.login" id="ulogin" class="username form-control input-sm" placeholder="Enter your login" required ng-minlength="3"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="uloginbgg">Login BGG</label>
+                            <div class="col-md-7">
+                                <input type="text" ng-model="ctrl.player.loginBgg" id="uloginbgg" class="username form-control input-sm" placeholder="Enter your login BGG" required ng-minlength="3"/>
                             </div>
                         </div>
                     </div>
@@ -37,6 +45,7 @@
                     <tr>
                         <th>ID</th>
                         <th>LOGIN</th>
+                        <th>LOGIN BGG</th>
                         <th width="100"></th>
                         <th width="100"></th>
                     </tr>
@@ -45,6 +54,7 @@
                     <tr ng-repeat="u in ctrl.getAllPlayers()">
                         <td>{{u.id}}</td>
                         <td>{{u.login}}</td>
+                        <td>{{u.loginBgg}}</td>
                         <td><button type="button" ng-click="ctrl.editPlayer(u.id)" class="btn btn-success custom-width">Edit</button></td>
                         <td><button type="button" ng-click="ctrl.removePlayer(u.id)" class="btn btn-danger custom-width">Remove</button></td>
                     </tr>
