@@ -84,6 +84,19 @@ angular.module('letsPlayApp').controller('PlayerController',
                     }
                 );
         }
+        
+        function importCollectionPlayer(id){
+            console.log('About to import collection Player with id '+id);
+            PlayerService.importCollectionPlayer(id)
+                .then(
+                    function(){
+                        console.log('Player '+id + ' collection imported successfully');
+                    },
+                    function(errResponse){
+                        console.error('Error while removing player '+id +', Error :'+errResponse.data);
+                    }
+                );
+        }
  
         function getAllPlayers(){
             return PlayerService.getAllPlayers();

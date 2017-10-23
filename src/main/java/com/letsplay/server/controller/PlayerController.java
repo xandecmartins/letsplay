@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.letsplay.server.entity.Player;
+import com.letsplay.server.service.BoardGameService;
 import com.letsplay.server.service.PlayerService;
 import com.letsplay.server.util.CustomErrorType;
  
@@ -26,6 +27,9 @@ public class PlayerController {
  
     @Autowired
     private PlayerService playerService; //Service which will do all data retrieval/manipulation work
+    
+    @Autowired
+    private BoardGameService boardGameService;
  
     // -------------------Retrieve All Players---------------------------------------------
  
@@ -69,6 +73,22 @@ public class PlayerController {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/player/{id}").buildAndExpand(player.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+    
+    @RequestMapping(value = "/player/{id}/import", method = RequestMethod.POST)
+    public ResponseEntity<?> importCollectionPlayer(@PathVariable("id") long id) {
+        logger.info("Updating Player with id {}", id);
+ 
+        Player currentPlayer = playerService.findById(id);
+ 
+        if (currentPlayer == null) {
+            logger.error("Unable to import collection of Player with id {}, player not found.", id);
+            return new ResponseEntity<>(new CustomErrorType("Unable to import collection of Player with id " + id + ", player not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+ 
+        boardGameService.importBoardGameFromBGG(currentPlayer);
+        return new ResponseEntity<Player>(currentPlayer, HttpStatus.OK);
     }
  
     // ------------------- Update a Player ------------------------------------------------

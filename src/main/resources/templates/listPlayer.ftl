@@ -57,6 +57,7 @@
                         <td>{{u.loginBgg}}</td>
                         <td><button type="button" ng-click="ctrl.editPlayer(u.id)" class="btn btn-success custom-width">Edit</button></td>
                         <td><button type="button" ng-click="ctrl.removePlayer(u.id)" class="btn btn-danger custom-width">Remove</button></td>
+                        <td><button type="button" ng-click="ctrl.importCollectionPlayer(u.id)" class="btn btn-success custom-width">Import</button></td>
                     </tr>
                     </tbody>
                 </table>      

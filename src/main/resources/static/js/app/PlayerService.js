@@ -105,6 +105,23 @@ angular.module('letsPlayApp').factory('PlayerService',
                     );
                 return deferred.promise;
             }
+            
+            function importCollectionPlayer(id) {
+                console.log('Importing collection of Player with id '+id);
+                var deferred = $q.defer();
+                $http.post(urls.PLAYER_SERVICE_API + id+"/import")
+                    .then(
+                        function (response) {
+                            loadAllPlayers();
+                            deferred.resolve(response.data);
+                        },
+                        function (errResponse) {
+                            console.error('Error while importing collection of Player with id :'+id);
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
+            }
  
         }
     ]);
