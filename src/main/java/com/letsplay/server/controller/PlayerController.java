@@ -1,6 +1,8 @@
 package com.letsplay.server.controller;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.letsplay.server.dto.PlayerDTO;
 import com.letsplay.server.entity.Player;
 import com.letsplay.server.service.BoardGameService;
 import com.letsplay.server.service.PlayerService;
@@ -30,17 +33,20 @@ public class PlayerController {
     
     @Autowired
     private BoardGameService boardGameService;
+    
+    @Autowired
+	private ModelMapper modelMapper;
  
     // -------------------Retrieve All Players---------------------------------------------
  
     @RequestMapping(value = "/player/", method = RequestMethod.GET)
-    public ResponseEntity<List<Player>> listAllPlayers() {
+    public ResponseEntity<List<PlayerDTO>> listAllPlayers() {
         List<Player> players = playerService.findAllPlayers();
         if (players.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             // You many decide to return HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<List<Player>>(players, HttpStatus.OK);
+        return new ResponseEntity<List<PlayerDTO>>(convertToDto(players), HttpStatus.OK);
     }
  
     // -------------------Retrieve Single Player------------------------------------------
@@ -54,7 +60,7 @@ public class PlayerController {
             return new ResponseEntity<>(new CustomErrorType("Player with id " + id 
                     + " not found"), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Player>(player, HttpStatus.OK);
+        return new ResponseEntity<PlayerDTO>(convertToDto(player), HttpStatus.OK);
     }
  
     // -------------------Create a Player-------------------------------------------
@@ -88,7 +94,7 @@ public class PlayerController {
         }
  
         boardGameService.importBoardGameFromBGG(currentPlayer);
-        return new ResponseEntity<Player>(currentPlayer, HttpStatus.OK);
+        return new ResponseEntity<PlayerDTO>(convertToDto(currentPlayer), HttpStatus.OK);
     }
  
     // ------------------- Update a Player ------------------------------------------------
@@ -108,7 +114,7 @@ public class PlayerController {
         currentPlayer.setLogin(player.getLogin());
  
         playerService.updatePlayer(currentPlayer);
-        return new ResponseEntity<Player>(currentPlayer, HttpStatus.OK);
+        return new ResponseEntity<PlayerDTO>(convertToDto(currentPlayer), HttpStatus.OK);
     }
  
     // ------------------- Delete a Player-----------------------------------------
@@ -124,7 +130,7 @@ public class PlayerController {
                     HttpStatus.NOT_FOUND);
         }
         playerService.deletePlayerById(id);
-        return new ResponseEntity<Player>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<PlayerDTO>(HttpStatus.NO_CONTENT);
     }
  
     // ------------------- Delete All Players-----------------------------
@@ -136,4 +142,17 @@ public class PlayerController {
         playerService.deleteAllPlayers();
         return new ResponseEntity<Player>(HttpStatus.NO_CONTENT);
     }
+    
+    private PlayerDTO convertToDto(Player player) {
+		return modelMapper.map(player, PlayerDTO.class);
+	}
+
+	private List<PlayerDTO> convertToDto(List<Player> listPlayer) {
+		List<PlayerDTO> retVal = new ArrayList<>();
+		for (Player player : listPlayer) {
+			retVal.add(modelMapper.map(player, PlayerDTO.class));
+		}
+
+		return retVal;
+	}
 }
