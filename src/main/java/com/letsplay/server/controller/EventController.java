@@ -1,6 +1,8 @@
 package com.letsplay.server.controller;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.letsplay.server.dto.EventDTO;
 import com.letsplay.server.entity.Event;
 import com.letsplay.server.service.EventService;
 import com.letsplay.server.util.CustomErrorType;
@@ -27,16 +30,18 @@ public class EventController {
     @Autowired
     private EventService eventService; //Service which will do all data retrieval/manipulation work
  
+    @Autowired
+	private ModelMapper modelMapper;
     // -------------------Retrieve All Events---------------------------------------------
  
     @RequestMapping(value = "/event/", method = RequestMethod.GET)
-    public ResponseEntity<List<Event>> listAllEvents() {
+    public ResponseEntity<List<EventDTO>> listAllEvents() {
         List<Event> events = eventService.findAllEvents();
         if (events.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             // You many decide to return HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
+        return new ResponseEntity<List<EventDTO>>(convertToDto(events), HttpStatus.OK);
     }
  
     // -------------------Retrieve Single Event------------------------------------------
@@ -50,7 +55,7 @@ public class EventController {
             return new ResponseEntity<>(new CustomErrorType("Event with id " + id 
                     + " not found"), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Event>(event, HttpStatus.OK);
+        return new ResponseEntity<EventDTO>(convertToDto(event), HttpStatus.OK);
     }
  
     // -------------------Create a Event-------------------------------------------
@@ -84,7 +89,7 @@ public class EventController {
         
  
         eventService.updateEvent(currentEvent);
-        return new ResponseEntity<Event>(currentEvent, HttpStatus.OK);
+        return new ResponseEntity<EventDTO>(convertToDto(currentEvent), HttpStatus.OK);
     }
  
     // ------------------- Delete a Event-----------------------------------------
@@ -100,16 +105,29 @@ public class EventController {
                     HttpStatus.NOT_FOUND);
         }
         eventService.deleteEventById(id);
-        return new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<EventDTO>(HttpStatus.NO_CONTENT);
     }
  
     // ------------------- Delete All Events-----------------------------
  
     @RequestMapping(value = "/event/", method = RequestMethod.DELETE)
-    public ResponseEntity<Event> deleteAllEvents() {
+    public ResponseEntity<EventDTO> deleteAllEvents() {
         logger.info("Deleting All Events");
  
         eventService.deleteAllEvents();
-        return new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<EventDTO>(HttpStatus.NO_CONTENT);
     }
+    
+    private EventDTO convertToDto(Event event) {
+		return modelMapper.map(event, EventDTO.class);
+	}
+
+	private List<EventDTO> convertToDto(List<Event> listEvent) {
+		List<EventDTO> retVal = new ArrayList<>();
+		for (Event event : listEvent) {
+			retVal.add(modelMapper.map(event, EventDTO.class));
+		}
+
+		return retVal;
+	}
 }

@@ -17,8 +17,6 @@
                     <tr ng-repeat="u in ctrl.getAllBoardGames()">
                         <td>{{u.id}}</td>
                         <td>{{u.name}}</td>
-                        <td><button type="button" ng-click="ctrl.editBoardGame(u.id)" class="btn btn-success custom-width">Edit</button></td>
-                        <td><button type="button" ng-click="ctrl.removeBoardGame(u.id)" class="btn btn-danger custom-width">Remove</button></td>
                     </tr>
                     </tbody>
                 </table>      

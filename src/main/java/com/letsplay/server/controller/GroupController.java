@@ -1,6 +1,8 @@
 package com.letsplay.server.controller;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.letsplay.server.dto.GroupDTO;
 import com.letsplay.server.entity.Group;
 import com.letsplay.server.service.GroupService;
 import com.letsplay.server.util.CustomErrorType;
@@ -27,16 +30,19 @@ public class GroupController {
     @Autowired
     private GroupService groupService; //Service which will do all data retrieval/manipulation work
  
+    @Autowired
+	private ModelMapper modelMapper;
+    
     // -------------------Retrieve All Groups---------------------------------------------
  
     @RequestMapping(value = "/group/", method = RequestMethod.GET)
-    public ResponseEntity<List<Group>> listAllGroups() {
+    public ResponseEntity<List<GroupDTO>> listAllGroups() {
         List<Group> groups = groupService.findAllGroups();
         if (groups.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             // You many decide to return HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<List<Group>>(groups, HttpStatus.OK);
+        return new ResponseEntity<List<GroupDTO>>(convertToDto(groups), HttpStatus.OK);
     }
  
     // -------------------Retrieve Single Group------------------------------------------
@@ -50,7 +56,7 @@ public class GroupController {
             return new ResponseEntity<>(new CustomErrorType("Group with id " + id 
                     + " not found"), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Group>(group, HttpStatus.OK);
+        return new ResponseEntity<GroupDTO>(convertToDto(group), HttpStatus.OK);
     }
  
     // -------------------Create a Group-------------------------------------------
@@ -88,7 +94,7 @@ public class GroupController {
         currentGroup.setName(group.getName());
  
         groupService.updateGroup(currentGroup);
-        return new ResponseEntity<Group>(currentGroup, HttpStatus.OK);
+        return new ResponseEntity<GroupDTO>(convertToDto(currentGroup), HttpStatus.OK);
     }
  
     // ------------------- Delete a Group-----------------------------------------
@@ -104,16 +110,29 @@ public class GroupController {
                     HttpStatus.NOT_FOUND);
         }
         groupService.deleteGroupById(id);
-        return new ResponseEntity<Group>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<GroupDTO>(HttpStatus.NO_CONTENT);
     }
  
     // ------------------- Delete All Groups-----------------------------
  
     @RequestMapping(value = "/group/", method = RequestMethod.DELETE)
-    public ResponseEntity<Group> deleteAllGroups() {
+    public ResponseEntity<GroupDTO> deleteAllGroups() {
         logger.info("Deleting All Groups");
  
         groupService.deleteAllGroups();
-        return new ResponseEntity<Group>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<GroupDTO>(HttpStatus.NO_CONTENT);
     }
+    
+    private GroupDTO convertToDto(Group group) {
+		return modelMapper.map(group, GroupDTO.class);
+	}
+
+	private List<GroupDTO> convertToDto(List<Group> listGroup) {
+		List<GroupDTO> retVal = new ArrayList<>();
+		for (Group group : listGroup) {
+			retVal.add(modelMapper.map(group, GroupDTO.class));
+		}
+
+		return retVal;
+	}
 }
