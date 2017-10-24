@@ -1,6 +1,10 @@
 package com.letsplay.server.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.transaction.Transactional;
 
@@ -16,14 +20,24 @@ public class EventServiceImpl implements EventService{
  
     @Autowired
     private EventRepository eventRepository;
-    
+    private SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
  
     public Event findById(Long id) {
         return eventRepository.findOne(id);
     }
  
     public void saveEvent(Event event) {
-        eventRepository.save(event);
+    	sdfInput.setTimeZone(TimeZone.getTimeZone("UTC-3"));
+		try {
+			Date date = sdfInput.parse(event.getTime());
+			date.setHours(date.getHours()-3);
+			event.setTime(sdfInput.format(date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	eventRepository.save(event);
     }
  
     public void updateEvent(Event event){

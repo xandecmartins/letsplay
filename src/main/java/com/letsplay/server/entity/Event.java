@@ -14,17 +14,20 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Event {
-
+	
+	
 	@Id
 	@GeneratedValue
 	private Long id;
 	
 	private Date date;
 	
+	private String time;
+	
 	private String location;
 	
 	private String observations;
-
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "event_boardgame", 
 		joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"), 
@@ -46,14 +49,6 @@ public class Event {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public String getLocation() {
@@ -95,5 +90,20 @@ public class Event {
 	public void setConfirmedPlayers(List<Player> confirmedPlayers) {
 		this.confirmedPlayers = confirmedPlayers;
 	}
-	
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
 }

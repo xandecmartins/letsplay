@@ -28,6 +28,12 @@ public class Group {
 	
 	private Date lastGame;
 	
+	public Group(Long id) {
+		this.id = id;
+	}
+	public Group() {
+	}
+	
 	public Long getId() {
 		return id;
 	}

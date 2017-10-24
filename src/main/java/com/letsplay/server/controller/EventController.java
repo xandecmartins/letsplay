@@ -1,5 +1,4 @@
 package com.letsplay.server.controller;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -29,6 +28,8 @@ public class EventController {
  
     @Autowired
     private EventService eventService; //Service which will do all data retrieval/manipulation work
+    
+    
  
     @Autowired
 	private ModelMapper modelMapper;
@@ -63,7 +64,7 @@ public class EventController {
     @RequestMapping(value = "/event/", method = RequestMethod.POST)
     public ResponseEntity<?> createEvent(@RequestBody Event event, UriComponentsBuilder ucBuilder) {
         logger.info("Creating Event : {}", event);
- 
+        
         eventService.saveEvent(event);
  
         HttpHeaders headers = new HttpHeaders();

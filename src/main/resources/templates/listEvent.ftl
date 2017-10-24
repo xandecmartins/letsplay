@@ -12,7 +12,7 @@
                         <div class="form-group col-md-12">
                             <label class="col-md-2 control-lable" for="ugroup">Group</label>
                             <div class="col-md-7">
-                            	<select name="selectgroup" ng-model="ctrl.event.group">
+                            	<select name="selectgroup" ng-model="ctrl.event.group.id">
       								<option ng-repeat="group in ctrl.getAllGroups()" ng-value="group.id">{{group.name}}</option>
       								<option value="">-- Select Group --</option>
     							</select>
@@ -29,21 +29,27 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label class="col-md-2 control-lable" for="ugroup">Data</label>
+                            <label class="col-md-2 control-lable" for="udate">Date</label>
                             <div class="col-md-7">
-								<datepicker date-month-title="Select Month">
-    								<input ng-model="ctrl.event.date"/>
-								</datepicker>
-                         
+								<input type="date" ng-model="ctrl.event.date" value="{{ ctrl.event.date | date: 'dd/MM/yyyy' }}" id="item_date" required/>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="ugroup">Start Time</label>
+                            <div class="col-md-7">
+								<input type="time" id="event_time" name="input" ng-model="ctrl.event.time" placeholder="HH:mm" min="16:00" max="17:30" required />
+                            </div>
+                        </div>
+                    </div>
+                     
                     
                      <div class="row">
                         <div class="form-group col-md-12">
                             <label class="col-md-2 control-lable" for="uobs">Observations</label>
                             <div class="col-md-7">
-                                <textarea rows="10" cols="30" ng-model="ctrl.group.observationn" id="uobs" class="username form-control input-sm" placeholder="Enter the observations of the event" required ng-minlength="3"></textarea>
+                                <textarea rows="10" cols="30" ng-model="ctrl.event.observations" id="uobs" class="username form-control input-sm" placeholder="Enter the observations of the event"></textarea>
                             </div>
                         </div>
                     </div>
@@ -68,8 +74,10 @@
                     <tr>
                         <th>ID</th>
                         <th>DATE</th>
+                        <th>START DATE</th>
                         <th>LOCATION</th>
                         <th>GROUP</th>
+                        <th>OBSERVATIONS</th>
                         <th width="100"></th>
                         <th width="100"></th>
                     </tr>
@@ -78,8 +86,10 @@
                     <tr ng-repeat="u in ctrl.getAllEvents()">
                         <td>{{u.id}}</td>
                         <td>{{u.date}}</td>
+                        <td>{{u.time}}</td>
                         <td>{{u.location}}</td>
                         <td>{{u.group.name}}</td>
+                        <td>{{u.group.observations}}</td>
                         <td><button type="button" ng-click="ctrl.editEvent(u.id)" class="btn btn-success custom-width">Edit</button></td>
                         <td><button type="button" ng-click="ctrl.removeEvent(u.id)" class="btn btn-danger custom-width">Remove</button></td>
                     </tr>
