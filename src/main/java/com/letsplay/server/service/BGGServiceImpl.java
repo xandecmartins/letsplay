@@ -38,7 +38,9 @@ public class BGGServiceImpl implements BGGService{
 		List<BoardGame> retVal = new LinkedList<>();
 		
 		for (BGGBoardGameTO bggBoardGameTO : collection) {
-			retVal.add(modelMapper.map(bggBoardGameTO, BoardGame.class));
+			if(bggBoardGameTO.getOwned()) {
+				retVal.add(modelMapper.map(bggBoardGameTO, BoardGame.class));
+			}
 		}
 		
 		return retVal;

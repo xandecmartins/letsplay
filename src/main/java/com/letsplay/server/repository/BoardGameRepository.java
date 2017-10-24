@@ -15,6 +15,6 @@ public interface BoardGameRepository extends JpaRepository<BoardGame, Long>{
 	@Query(" Select distinct b from BoardGame b join b.players p join p.groups g where g.id = :id")
 	List<BoardGame> findByGroup(@Param("id") Long id);
 	
-	BoardGame findByName(String name);
+	BoardGame findByNameOrderByName(String name);
 	
 }
