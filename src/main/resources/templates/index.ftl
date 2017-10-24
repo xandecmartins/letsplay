@@ -5,6 +5,7 @@
         <title>${title}</title>
         <link href="css/bootstrap.css" rel="stylesheet"/>
         <link href="css/app.css" rel="stylesheet"/>
+        <link href="css/angular-datepicker.min.css" rel="stylesheet"/>
     </head>
     <body>
  		<nav class="navbar navbar-default">
@@ -27,7 +28,10 @@
         <script src="js/lib/angular-ui-router.min.js" ></script>
         <script src="js/lib/localforage.min.js" ></script>
         <script src="js/lib/ngStorage.min.js"></script>
+        <script src="js/lib/angular-datepicker.min.js"></script>
+        
         <script src="js/app/app.js"></script>
+        
         <script src="js/app/PlayerService.js"></script>
         <script src="js/app/PlayerController.js"></script>
         <script src="js/app/GroupService.js"></script>
@@ -36,5 +40,6 @@
         <script src="js/app/EventController.js"></script>
         <script src="js/app/BoardGameService.js"></script>
         <script src="js/app/BoardGameController.js"></script>
+        
     </body>
 </html>

@@ -11,6 +11,7 @@ angular.module('letsPlayApp').controller('EventController',
  
         self.submit = submit;
         self.getAllEvents = getAllEvents;
+        self.getAllGroups = getAllGroups;
         self.createEvent = createEvent;
         self.updateEvent = updateEvent;
         self.removeEvent = removeEvent;
