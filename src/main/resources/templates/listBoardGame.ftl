@@ -9,6 +9,11 @@
                     <tr>
                         <th>ID</th>
                         <th>NAME</th>
+                        <th>IMAGE</th>
+                        <th>MIN PLAYERS</th>
+                        <th>MAX PLAYERS</th>
+                        <th>PLAYING TIME</th>
+                        <th>EXPANSION</th>
                         <th width="100"></th>
                         <th width="100"></th>
                     </tr>
@@ -17,6 +22,11 @@
                     <tr ng-repeat="u in ctrl.getAllBoardGames()">
                         <td>{{u.id}}</td>
                         <td>{{u.name}}</td>
+                        <td><img src="{{u.thumbnail}}" /></td>
+                        <td>{{u.minPlayers}}</td>
+                        <td>{{u.maxPlayers}}</td>
+                        <td>{{u.playingTime}}</td>
+                        <td>{{u.isExpansion}}</td>
                     </tr>
                     </tbody>
                 </table>      
