@@ -3,6 +3,7 @@ package com.letsplay.server.service;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class BGGServiceImpl implements BGGService{
 	@Autowired
 	private AppProperties appProperties;
 	
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	@Override
 	public List<BoardGame> importCollectionFromUser(String userbgg) {
 		ResponseEntity<List<BGGBoardGameTO>> bggResponse =
@@ -34,10 +38,7 @@ public class BGGServiceImpl implements BGGService{
 		List<BoardGame> retVal = new LinkedList<>();
 		
 		for (BGGBoardGameTO bggBoardGameTO : collection) {
-			BoardGame game = new BoardGame();
-			game.setId(bggBoardGameTO.getGameId());
-			game.setName(bggBoardGameTO.getName());
-			retVal.add(game);
+			retVal.add(modelMapper.map(bggBoardGameTO, BoardGame.class));
 		}
 		
 		return retVal;
