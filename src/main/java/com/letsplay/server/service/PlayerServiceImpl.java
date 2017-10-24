@@ -31,7 +31,7 @@ public class PlayerServiceImpl implements PlayerService{
     }
     
     public void updatePlayer(Player player){
-        savePlayer(player);
+    	playerRepository.saveAndFlush(player);
     }
  
     public void deletePlayerById(Long id){

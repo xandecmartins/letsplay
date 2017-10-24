@@ -13,7 +13,7 @@ public class BoardGame {
 	private Long id;
 	
 	private String name;
-
+	
 	@ManyToMany(mappedBy="collection")
 	private List<Player> players;
 	
