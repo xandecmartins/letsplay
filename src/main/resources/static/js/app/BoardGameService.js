@@ -9,6 +9,7 @@ angular.module('letsPlayApp').factory('BoardGameService',
                 loadAllBoardGames: loadAllBoardGames,
                 getAllBoardGames: getAllBoardGames,
                 getBoardGame: getBoardGame,
+                loadAllBoardGamesByGroup: loadAllBoardGamesByGroup,
                 createBoardGame: createBoardGame,
                 updateBoardGame: updateBoardGame,
                 removeBoardGame: removeBoardGame
@@ -33,6 +34,25 @@ angular.module('letsPlayApp').factory('BoardGameService',
                     );
                 return deferred.promise;
             }
+            
+            function loadAllBoardGamesByGroup(id) {
+                console.log('Fetching all boardGames');
+                var deferred = $q.defer();
+                $http.get(urls.BOARD_GAME_SERVICE_API+'?group='+id)
+                    .then(
+                        function (response) {
+                            console.log('Fetched successfully all boardGames');
+                            $localStorage.boardGames = response.data;
+                            deferred.resolve(response);
+                        },
+                        function (errResponse) {
+                            console.error('Error while loading boardGames');
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
+            }
+ 
  
             function getAllBoardGames(){
                 return $localStorage.boardGames;
@@ -54,7 +74,7 @@ angular.module('letsPlayApp').factory('BoardGameService',
                     );
                 return deferred.promise;
             }
- 
+            
             function createBoardGame(boardGame) {
                 console.log('Creating BoardGame');
                 var deferred = $q.defer();

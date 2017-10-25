@@ -1,17 +1,21 @@
 'use strict';
  
 angular.module('letsPlayApp').controller('EventController',
-    ['EventService','GroupService', '$scope',  function( EventService, GroupService, $scope) {
+    ['EventService','GroupService', 'BoardGameService','$scope',  function( EventService, GroupService,BoardGameService, $scope) {
  
         var self = this;
         self.event = {};
         self.events=[];
         
         self.groups=[];
+        
+        self.boardGames=[];
  
         self.submit = submit;
         self.getAllEvents = getAllEvents;
         self.getAllGroups = getAllGroups;
+        self.getAllBoardGames = getAllBoardGames;
+        self.loadAllBoardGamesByGroup = loadAllBoardGamesByGroup; 
         self.createEvent = createEvent;
         self.updateEvent = updateEvent;
         self.removeEvent = removeEvent;
@@ -94,6 +98,14 @@ angular.module('letsPlayApp').controller('EventController',
         
         function getAllGroups(){
             return GroupService.getAllGroups();
+        }
+        
+        function getAllBoardGames(){
+        	self.boardGames=BoardGameService.getAllBoardGames();
+        }
+        
+        function loadAllBoardGamesByGroup(id) {
+        	BoardGameService.loadAllBoardGamesByGroup(id);
         }
  
         function editEvent(id) {

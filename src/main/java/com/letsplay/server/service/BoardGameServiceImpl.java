@@ -29,7 +29,7 @@ public class BoardGameServiceImpl implements BoardGameService {
 	}
 
 	public BoardGame findByName(String name) {
-		return boardGameRepository.findByNameOrderByName(name);
+		return boardGameRepository.findByName(name);
 	}
 
 	public List<BoardGame> findByGroup(Long idGroup) {
@@ -59,7 +59,7 @@ public class BoardGameServiceImpl implements BoardGameService {
 	}
 
 	public List<BoardGame> findAllBoardGames() {
-		return boardGameRepository.findAll();
+		return boardGameRepository.findAllByOrderByName();
 	}
 
 	public boolean isBoardGameExist(BoardGame boardGame) {

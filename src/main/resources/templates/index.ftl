@@ -36,10 +36,9 @@
         <script src="js/app/PlayerController.js"></script>
         <script src="js/app/GroupService.js"></script>
         <script src="js/app/GroupController.js"></script>
-        <script src="js/app/EventService.js"></script>
-        <script src="js/app/EventController.js"></script>
         <script src="js/app/BoardGameService.js"></script>
         <script src="js/app/BoardGameController.js"></script>
-        
+		<script src="js/app/EventService.js"></script>
+        <script src="js/app/EventController.js"></script>        
     </body>
 </html>

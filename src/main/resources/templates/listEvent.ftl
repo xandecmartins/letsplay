@@ -21,6 +21,17 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="ugames">Games</label>
+                            <div class="col-md-7">
+                            	<select ng-disabled="!ctrl.boardGames" name="selectgroup" ng-model="ctrl.event.selectedGames" multiple>
+      								<option ng-repeat="boardgame in ctrl.getAllBoardGamesByGroup(ctrl.event.group.id)" ng-value="{{boardgame.id}}">{{boardgame.name}}</option>
+      								<option value="">-- Select BoardGames --</option>
+    							</select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
                             <label class="col-md-2 control-lable" for="ulocal">Location</label>
                             <div class="col-md-7">
                                 <input type="text" ng-model="ctrl.event.location" id="ulocal" class="username form-control input-sm" placeholder="Enter the event location" required ng-minlength="3"/>
