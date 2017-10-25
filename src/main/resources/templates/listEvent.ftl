@@ -13,7 +13,7 @@
                             <label class="col-md-2 control-lable" for="ugroup">Group</label>
                             <div class="col-md-7">
                             	<select name="selectgroup" ng-model="ctrl.event.group.id">
-      								<option ng-repeat="group in ctrl.getAllGroups()" ng-value="group.id">{{group.name}}</option>
+      								<option ng-repeat="group in ctrl.getAllGroups()" ng-value="{{group.id}}">{{group.name}}</option>
       								<option value="">-- Select Group --</option>
     							</select>
                             </div>

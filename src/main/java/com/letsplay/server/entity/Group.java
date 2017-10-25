@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +17,8 @@ import javax.persistence.Table;
 public class Group {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "groups_seq_gen")
+	@SequenceGenerator(name = "groups_seq_gen", sequenceName = "groups_id_seq")
 	private Long id;
 	
 	@ManyToMany(mappedBy = "groups")

@@ -7,9 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -17,7 +19,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Player {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "players_seq_gen")
+	@SequenceGenerator(name = "players_seq_gen", sequenceName = "players_id_seq")
 	private Long id;
 
 	@NotEmpty
