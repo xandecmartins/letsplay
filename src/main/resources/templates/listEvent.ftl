@@ -100,7 +100,7 @@
                         <td>{{u.time}}</td>
                         <td>{{u.location}}</td>
                         <td>{{u.group.name}}</td>
-                        <td>{{u.group.observations}}</td>
+                        <td>{{u.observations}}</td>
                         <td><button type="button" ng-click="ctrl.editEvent(u.id)" class="btn btn-success custom-width">Edit</button></td>
                         <td><button type="button" ng-click="ctrl.removeEvent(u.id)" class="btn btn-danger custom-width">Remove</button></td>
                     </tr>
