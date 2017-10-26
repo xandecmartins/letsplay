@@ -9,13 +9,12 @@ angular.module('letsPlayApp').controller('EventController',
         
         self.groups=[];
         
-        self.boardGames=[];
+        self.boardgames=[];
  
         self.submit = submit;
         self.getAllEvents = getAllEvents;
         self.getAllGroups = getAllGroups;
         self.getAllBoardGames = getAllBoardGames;
-        self.loadAllBoardGamesByGroup = loadAllBoardGamesByGroup; 
         self.createEvent = createEvent;
         self.updateEvent = updateEvent;
         self.removeEvent = removeEvent;
@@ -101,13 +100,9 @@ angular.module('letsPlayApp').controller('EventController',
         }
         
         function getAllBoardGames(){
-        	self.boardGames=BoardGameService.getAllBoardGames();
+        	return BoardGameService.getAllBoardGames();
         }
         
-        function loadAllBoardGamesByGroup(id) {
-        	BoardGameService.loadAllBoardGamesByGroup(id);
-        }
- 
         function editEvent(id) {
             self.successMessage='';
             self.errorMessage='';

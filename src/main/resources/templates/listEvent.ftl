@@ -23,8 +23,8 @@
                         <div class="form-group col-md-12">
                             <label class="col-md-2 control-lable" for="ugames">Games</label>
                             <div class="col-md-7">
-                            	<select ng-disabled="!ctrl.boardGames" name="selectgroup" ng-model="ctrl.event.selectedGames" multiple>
-      								<option ng-repeat="boardgame in ctrl.getAllBoardGamesByGroup(ctrl.event.group.id)" ng-value="{{boardgame.id}}">{{boardgame.name}}</option>
+                            	<select name="selectgroup" ng-model="ctrl.event.selectedGames" multiple>
+      								<option ng-repeat="boardgame in ctrl.getAllBoardGames()" ng-value="{{boardgame}}">{{boardgame.name}}</option>
       								<option value="">-- Select BoardGames --</option>
     							</select>
                             </div>
