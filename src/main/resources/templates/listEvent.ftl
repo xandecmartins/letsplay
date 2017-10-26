@@ -24,7 +24,7 @@
                             <label class="col-md-2 control-lable" for="ugames">Games</label>
                             <div class="col-md-7">
                             	<select name="selectgroup" ng-model="ctrl.event.selectedGames" multiple>
-      								<option ng-repeat="boardgame in ctrl.getAllBoardGames()" ng-value="{{boardgame}}">{{boardgame.name}}</option>
+      								<option ng-repeat="boardgame in ctrl.getAllBoardGames()" ng-value="{{boardgame.id}}">{{boardgame.name}}</option>
       								<option value="">-- Select BoardGames --</option>
     							</select>
                             </div>

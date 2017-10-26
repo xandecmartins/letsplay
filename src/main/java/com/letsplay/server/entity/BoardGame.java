@@ -8,28 +8,35 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class BoardGame {
-	
+
 	@Id
 	private Long id;
-	
+
 	private String name;
-	
+
 	private String thumbnail;
-	
+
 	private Integer minPlayers;
-	
+
 	private Integer maxPlayers;
-	
+
 	private Integer playingTime;
-	
+
 	private Boolean isExpansion;
-	
-	@ManyToMany(mappedBy="collection")
+
+	@ManyToMany(mappedBy = "collection")
 	private List<Player> players;
-	
-	@ManyToMany(mappedBy="selectedGames")
+
+	@ManyToMany(mappedBy = "selectedGames")
 	private List<Event> events;
-	
+
+	public BoardGame() {
+	}
+
+	public BoardGame(Long id) {
+		this.id = id;
+	}
+
 	public List<Event> getEvents() {
 		return events;
 	}
@@ -45,7 +52,7 @@ public class BoardGame {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Long getGameId() {
 		return id;
 	}
