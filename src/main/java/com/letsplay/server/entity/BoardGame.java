@@ -33,8 +33,8 @@ public class BoardGame {
 	public BoardGame() {
 	}
 
-	public BoardGame(Long id) {
-		this.id = id;
+	public BoardGame(String id) {
+		this.id = Long.valueOf(id);
 	}
 
 	public List<Event> getEvents() {
