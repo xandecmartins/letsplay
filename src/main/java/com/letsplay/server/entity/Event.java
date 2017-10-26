@@ -31,7 +31,7 @@ public class Event {
 	
 	private String observations;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.REFRESH)
 	@JoinTable(name = "event_boardgame", 
 		joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name = "boardgame_id", referencedColumnName = "id"))
@@ -40,7 +40,7 @@ public class Event {
 	@ManyToOne
 	private Group group;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.REFRESH)
 	@JoinTable(name = "event_player", 
 		joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name = "player_id", referencedColumnName = "id"))
